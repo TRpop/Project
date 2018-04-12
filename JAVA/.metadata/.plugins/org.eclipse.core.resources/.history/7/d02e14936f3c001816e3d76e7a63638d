@@ -1,0 +1,37 @@
+import java.util.Collection;
+import java.util.HashSet;
+
+public class WriteExcel {
+
+    public void writeExcel() {
+
+        Collection staff = new HashSet();    
+
+        staff.add(new Products("101R15ss0100", "PALss Kids 1.5 A360 ", "321"));    
+        staff.add(new Products("101R1ss50100", "PAL sKids 1.5 A360 ", "236"));    
+
+        Map beans = new HashMap();    
+
+        beans.put("products", staff);    
+        XLSTransformer transformer = new XLSTransformer();    
+
+        try {    
+            transformer.transformXLS(templateFileName, beans, destFileName);   
+
+            System.out.println("Completed!!");    
+
+        } catch (ParsePropertyException e) {    
+            System.out.println("In ParsePropertyException");    
+            e.printStackTrace();    
+        } catch (IOException e) {    
+            System.out.println("In IOException");    
+            e.printStackTrace();    
+        }
+    }
+
+    public static void main(String[] args) {    
+        WriteExcel writeexcel = new WriteExcel();    
+        writeexcel.writeExcel();    
+    }    
+
+}    

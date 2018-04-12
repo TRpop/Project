@@ -1,0 +1,20 @@
+package test;
+
+public class main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String str = "x=10y=20x=20y=30a";
+        
+        int i = str.indexOf("x=");
+        int j = str.indexOf("y=");
+        for(int k = 0; k < 4; k++) {
+             System.out.println(str.substring(i+2, j));
+             i = str.indexOf("x=", i+1);
+             System.out.println(str.substring(j+2, i));
+             j = str.indexOf("y=", j+1);
+        }
+	}
+
+}

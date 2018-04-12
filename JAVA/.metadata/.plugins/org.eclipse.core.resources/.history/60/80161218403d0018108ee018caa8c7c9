@@ -1,0 +1,20 @@
+package test;
+
+public class main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String text = "x1y1x2y2x3y3";
+		String text2 = "\n";
+		
+		StringBuffer rec = new StringBuffer(text + text2);
+		if(rec.indexOf("\n") > 0) {
+			String sub = rec.substring(rec.indexOf("\n"));
+			System.out.println(sub);
+			rec.replace(0, rec.indexOf("\n"), "");
+			System.out.print(rec.toString());
+		}
+		System.out.print(rec.toString());
+	}
+
+}
