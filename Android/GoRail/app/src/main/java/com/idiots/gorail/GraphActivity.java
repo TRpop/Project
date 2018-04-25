@@ -42,6 +42,7 @@ public class GraphActivity extends AppCompatActivity {
     //private Double[] xData, yData;
     HashMap<Integer, DataPoint> point;
     private BroadcastReceiver mReceiver;
+    private int nData;
 
     // Storage Permissions
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
@@ -85,7 +86,6 @@ public class GraphActivity extends AppCompatActivity {
                     Fifo<Double> yData = new Fifo<>();
 
                     int i, j;
-                    int n = 0;
 
                     while(!MainActivity.q.isEmpty()){
 
@@ -94,10 +94,10 @@ public class GraphActivity extends AppCompatActivity {
                         }
                         MainActivity.q.popFront();
 
-                        if(n == 0){
+                        if(nData == 0){
                             i = received.indexOf("x");
                             j = received.indexOf("y");
-                            n = Integer.parseInt(received.substring(received.indexOf("n")+1, i));
+                            nData = Integer.parseInt(received.substring(received.indexOf("n")+1, i));
                         }
 
                         if(received.indexOf("b") > 0) {
@@ -114,9 +114,7 @@ public class GraphActivity extends AppCompatActivity {
                         }
                     }
 
-                    point.clear();
-
-                    for(int k = 0; k < n; k++){
+                    for(int k = 0; k < nData; k++){
                         point.put(k, new DataPoint(xData.front(), yData.front()));
                         xData.popFront(); yData.popFront();
                     }
@@ -176,6 +174,8 @@ public class GraphActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.sync_menu:
                 //TODO 그래프를 그리기 위한 데이터를 요청하고 받아온다.
+                point.clear();
+                nData = 0;
                 requestData();
 
                 /*
